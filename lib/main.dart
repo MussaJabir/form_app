@@ -32,18 +32,21 @@ class UserForm extends StatefulWidget {
 class _UserFormState extends State<UserForm> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _secondNameController = TextEditingController();
+  final TextEditingController _thirdNameController = TextEditingController();
+
   String firstName = '';
   String secondName = '';
+  String thirdName = '';
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Welcome ${firstName.isNotEmpty || secondName.isNotEmpty ? '$firstName $secondName' : ''}',
+            'Welcome ${firstName.isNotEmpty || secondName.isNotEmpty || thirdName.isNotEmpty ? '$firstName $secondName $thirdName' : ''}',
             style: const TextStyle(fontSize: 20),
           ),
           const SizedBox(height: 20),
@@ -63,11 +66,20 @@ class _UserFormState extends State<UserForm> {
             ),
           ),
           const SizedBox(height: 20),
+          TextField(
+            controller: _thirdNameController,
+            decoration: const InputDecoration(
+              labelText: "Enter your third name",
+              border: OutlineInputBorder(),
+            ),
+          ),
+          const SizedBox(height: 20),
           ElevatedButton(
             onPressed: () {
               setState(() {
                 firstName = _firstNameController.text;
                 secondName = _secondNameController.text;
+                thirdName = _thirdNameController.text;
               });
             },
             child: const Text('Submit'),
@@ -79,4 +91,3 @@ class _UserFormState extends State<UserForm> {
 }
 
 const FormApp formApp = FormApp();
-
